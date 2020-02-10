@@ -42,4 +42,30 @@ router.delete('/:id', function(req, res, next) {
     });
 });
 
+router.get('/daily/:status',  function(req, res, next) {
+    Cases.aggregate([
+        {
+            $match: { status: req.params.status }
+        },
+        {
+            $group: { 
+                _id: {
+                    date: {
+                        $dateToString: {
+                            format: "%Y-%m-%d", 
+                            date: "$updated"
+                        }
+                    }
+                }, 
+                count: {
+                    $sum: 1
+                }
+            }
+        }
+    ], function (err, cases) {
+        if (err) return next(err);
+        res.json(cases);
+    });
+});
+
 module.exports = router;
