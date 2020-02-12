@@ -61,7 +61,8 @@ router.get('/daily/:status',  function(req, res, next) {
                     $sum: 1
                 }
             }
-        }
+        },
+        { $sort: {_id: 1} }
     ], function (err, cases) {
         if (err) return next(err);
         res.json(cases);
