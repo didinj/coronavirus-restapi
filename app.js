@@ -9,7 +9,7 @@ var usersRouter = require('./routes/users');
 var casesRouter = require('./routes/cases');
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/coronavirus', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://127.0.0.1/coronavirus', { useNewUrlParser: true, useUnifiedTopology: true });
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
